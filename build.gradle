@@ -1,7 +1,37 @@
 plugins {
     id 'groovy'
+    id 'maven-publish'
+
+    id 'com.jfrog.bintray' version '1.7.3'
 }
 
 dependencies {
     compile gradleApi()
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId 'org.iatoki'
+            artifactId 'gradle-play-idea'
+            version '0.1'
+            from components.java
+        }
+    }
+}
+
+bintray {
+   user = System.getenv('BINTRAY_USER')
+   key = System.getenv('BINTRAY_KEY')
+   publications = ['maven']
+
+   pkg {
+       repo = 'releases'
+       name = 'gradle-play-idea'
+       userOrg = 'ia-toki'
+
+       version {
+           name = '0.1'
+       }
+   }
 }
