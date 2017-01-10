@@ -9,6 +9,10 @@ dependencies {
     compile gradleApi()
 }
 
+task sourceJar(type: Jar) {
+    from sourceSets.main.allGroovy
+}
+
 publishing {
     publications {
         maven(MavenPublication) {
@@ -16,6 +20,10 @@ publishing {
             artifactId 'gradle-play-idea'
             version '0.1'
             from components.java
+
+            artifact sourceJar {
+                classifier "sources"
+            }
         }
     }
 }
