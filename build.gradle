@@ -21,17 +21,17 @@ publishing {
 }
 
 bintray {
-   user = System.getenv('BINTRAY_USER')
-   key = System.getenv('BINTRAY_KEY')
-   publications = ['maven']
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+    publications = ['maven']
 
-   pkg {
-       repo = 'releases'
-       name = 'gradle-play-idea'
-       userOrg = 'ia-toki'
+    pkg {
+        repo = 'releases'
+        name = 'gradle-play-idea'
+        userOrg = 'ia-toki'
 
-       version {
-           name = '0.1'
-       }
-   }
+        version {
+            name = '0.1'
+        }
+    }
 }
