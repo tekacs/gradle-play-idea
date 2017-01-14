@@ -3,11 +3,14 @@ plugins {
     id 'maven-publish'
 
     id 'com.jfrog.bintray' version '1.7.3'
+    id 'com.palantir.git-version' version '0.5.3'
 }
 
 dependencies {
     compile gradleApi()
 }
+
+version gitVersion().substring(1)
 
 task sourceJar(type: Jar) {
     from sourceSets.main.allGroovy
@@ -18,7 +21,7 @@ publishing {
         maven(MavenPublication) {
             groupId 'org.iatoki'
             artifactId 'gradle-play-idea'
-            version '0.1'
+            version gitVersion().substring(1)
             from components.java
 
             artifact sourceJar {
@@ -39,7 +42,7 @@ bintray {
         userOrg = 'ia-toki'
 
         version {
-            name = '0.1'
+            name = gitVersion().substring(1)
         }
     }
 }
