@@ -21,11 +21,11 @@ publishing {
         maven(MavenPublication) {
             groupId 'org.iatoki'
             artifactId 'gradle-play-idea'
-            version gitVersion().substring(1)
+            version project.version
             from components.java
 
             artifact sourceJar {
-                classifier "sources"
+                classifier 'sources'
             }
         }
     }
@@ -42,7 +42,7 @@ bintray {
         userOrg = 'ia-toki'
 
         version {
-            name = gitVersion().substring(1)
+            name = project.version
         }
     }
 }
