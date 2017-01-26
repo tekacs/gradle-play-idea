@@ -1,4 +1,4 @@
-package org.iatoki.gradle.idea
+package org.iatoki.gradle.play.idea
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -9,15 +9,9 @@ class PlayIdeaPlugin implements Plugin<Project> {
             sourceDirs += project.file('app')
             testSourceDirs += project.file('test')
 
-            def playGeneratedSrcDirs = [
-                    "minifyPlayBinaryPlayJavaScript",
-                    "routesScalaSources",
-                    "twirlTemplatesScalaSources"
-            ]
-            playGeneratedSrcDirs.each {
-                def dir = project.file("${project.buildDir}/src/play/binary/$it")
-                sourceDirs += dir
-                generatedSourceDirs += dir
+            project.file("${project.buildDir}/src/play/binary").listFiles().each {
+                sourceDirs += it
+                generatedSourceDirs += it
             }
 
             outputDir = project.file("${project.buildDir}/playBinary/classes")
