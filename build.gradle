@@ -1,15 +1,22 @@
 plugins {
     id 'groovy'
+    id 'java-gradle-plugin'
     id 'maven-publish'
 
     id 'com.jfrog.bintray' version '1.7.3'
     id 'com.palantir.git-version' version '0.5.3'
 }
 
-dependencies {
-    compile gradleApi()
+gradlePlugin {
+    plugins {
+        playIdea {
+            id = 'org.iatoki.play-idea'
+            implementationClass = 'org.iatoki.gradle.play.idea.PlayIdeaPlugin'
+        }
+   }
 }
 
+group 'org.iatoki'
 version gitVersion().substring(1)
 
 task sourceJar(type: Jar) {
@@ -19,11 +26,6 @@ task sourceJar(type: Jar) {
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId 'org.iatoki'
-            artifactId 'gradle-play-idea'
-            version project.version
-            from components.java
-
             artifact sourceJar {
                 classifier 'sources'
             }
