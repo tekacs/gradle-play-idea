@@ -10,8 +10,10 @@ class PlayIdeaPlugin implements Plugin<Project> {
             testSourceDirs += project.file('test')
 
             project.file("${project.buildDir}/src/play/binary").listFiles().each {
-                sourceDirs += it
-                generatedSourceDirs += it
+                if (it.name.endsWith('ScalaSources')) {
+                    sourceDirs += it
+                    generatedSourceDirs += it
+                }
             }
 
             outputDir = project.file("${project.buildDir}/playBinary/classes")
