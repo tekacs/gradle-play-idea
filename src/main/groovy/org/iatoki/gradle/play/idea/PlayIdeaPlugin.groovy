@@ -19,6 +19,10 @@ class PlayIdeaPlugin implements Plugin<Project> {
             outputDir = project.file("${project.buildDir}/playBinary/classes")
             testOutputDir = project.file("${project.buildDir}/playBinary/testClasses")
 
+            scopes.COMPILE = scopes.COMPILE ?: [plus: [], minus: []]
+            scopes.RUNTIME = scopes.RUNTIME ?: [plus: [], minus: []]
+            scopes.TEST = scopes.TEST ?: [plus: [], minus: []]
+            
             scopes.COMPILE.plus += [ project.configurations.play ]
             scopes.RUNTIME.plus += [ project.configurations.playRun ]
             scopes.RUNTIME.minus += [ project.configurations.play ]
